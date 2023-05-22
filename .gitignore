@@ -20,3 +20,6 @@ pnpm-lock.yaml
 
 # readme
 README.md
+
+# vscode files for debugging
+.vscode

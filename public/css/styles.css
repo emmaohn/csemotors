@@ -35,8 +35,8 @@ header a, .own-now {
 }
 
 /* navigation styles */
-nav > ul > li {
-  list-style: none;
+nav > ul > li > a {
+  text-decoration: none;
   color: white;
 }
 nav > ul {
@@ -100,6 +100,38 @@ nav {
 }
 .upgrade img {
   padding: .6em;
+}
+
+/* class pages */
+#inv-display {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  /* padding: 0; */
+  padding: 1em;
+}
+
+#inv-display li img {
+  height: 100%;
+  max-height: 10em;
+}
+#inv-display li {
+  height: 100%;
+  width: 25em;
+  background-color: black;
+  border-radius: 1.5em;
+  margin: 1em;
+  padding: 2em;
+  text-align: center;
+}
+
+.namePrice {
+  color: white;
+}
+.namePrice h2 > a {
+  font-family: inherit;
+  color: white;
+  text-decoration: none;
 }
 
 /* footer */
