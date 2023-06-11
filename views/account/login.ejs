@@ -9,6 +9,13 @@
 <%- messages() %>
 
 <!-- display errors -->
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
 
 <!-- display the contents of the page -->
 <form class="form login-form" action="/account/login" method="post">
