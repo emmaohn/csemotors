@@ -37,7 +37,7 @@ router.post(
   handleErrors(invController.addVehicle),
 )
 
-// Route to build inventory by vehicle view
+// Route to build broken page
 router.get("/broken", handleErrors(invController.buildBrokenPage));
 
 module.exports = router;

@@ -81,7 +81,7 @@ invCont.buildAddclass = async function (req, res, next) {
 }
 
 /* ****************************************
-*  Process class info
+*  Process addclass info
 * *************************************** */
 invCont.addClass = async function (req, res, next) {
   const { classification_name } = req.body

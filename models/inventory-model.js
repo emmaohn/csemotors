@@ -37,6 +37,19 @@ async function getInventoryByInvId(inv_id) {
   }
 }
 
+/* **********************
+ *   Check for existing classification
+ * ********************* */
+async function checkExistingClassification(classification_name){
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const classification = await pool.query(sql, [classification_name])
+    return classification.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
 // INVENTORY MANAGEMENT
 /* ***************************
  *  Add new classification
@@ -62,4 +75,4 @@ async function addVehicle(classification_id, inv_make, inv_model, inv_year, inv_
   }
 }
 
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryByInvId, addClass, addVehicle }
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryByInvId, addClass, addVehicle, checkExistingClassification }
