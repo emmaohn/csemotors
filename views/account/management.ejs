@@ -1,0 +1,31 @@
+<!-- adds h1, good seo, and a heading for the page! -->
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<!-- displays messages -->
+<%- messages() %>
+
+<!-- display errors -->
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<div class="management-links">
+  <a href="/inv/addclass">Add New Classification</a>
+  <a href="/inv/addvehicle">Add New Vehicle</a>
+</div>
+
+<!-- CLASSIFICATION DROP DOWN -->
+<form class="form--fieldset" action="">
+  <label for="classification_id">Classification:</label>
+  <select name="classification_id" id="classification_id">
+    <%- classSelect %>
+  </select>
+</form>

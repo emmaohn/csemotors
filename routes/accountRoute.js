@@ -2,8 +2,11 @@
 const express = require("express")
 const router = new express.Router() 
 const accountController = require("../controllers/accountController")
-const { handleErrors } = require("../utilities")
+const { handleErrors, checkLogin } = require("../utilities")
 const regValidate = require('../utilities/account-validation')
+
+// Route to build default account view
+router.get("/", checkLogin, handleErrors(accountController.buildAccount));
 
 // Route to build account login view
 router.get("/login", handleErrors(accountController.buildLogin));
@@ -24,7 +27,7 @@ router.post(
   "/login",
   regValidate.loginRules(),
   regValidate.checkLoginData,
-  handleErrors(accountController.loginAccount)
+  handleErrors(accountController.accountLogin)
 )
 
 module.exports = router

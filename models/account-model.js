@@ -1,7 +1,7 @@
 const pool = require("../database/")
 
 /* *****************************
-*   Register new account
+*   Register new account (INSERT)
 * *************************** */
 async function registerAccount(account_firstname, account_lastname, account_email, account_password){
   try {
@@ -12,24 +12,13 @@ async function registerAccount(account_firstname, account_lastname, account_emai
   }
 }
 
-/* *****************************
-*   Login existing account
-* *************************** */
-async function loginAccount(account_email, account_password) {
-  try {
-    const sql = "SELECT * FROM account WHERE account_email = $1 AND account_password = $2"
-    const accountMatch = await pool.query(sql, [account_email, account_password])
-    return accountMatch.rows
-  } catch (error) {
-    return error.message
-  }
-}
-
 /* **********************
- *   Check for existing email
+ * Check for existing email
+ * Used for registration, func == registerAccount (desired output == 0)
  * ********************* */
 async function checkExistingEmail(account_email){
   try {
+    // get account info on account_email, returns 0 or 1
     const sql = "SELECT * FROM account WHERE account_email = $1"
     const email = await pool.query(sql, [account_email])
     return email.rowCount
@@ -38,25 +27,22 @@ async function checkExistingEmail(account_email){
   }
 }
 
-/* **********************
- *   Check for correct password
- * ********************* */
-async function checkAccountPassword(account_email, account_password){
+/* *****************************
+ * Return account data using email address
+ * Used for logging in, func == accountLogin (desired output == 1)
+ * ***************************** */
+async function getAccountByEmail (account_email) {
   try {
-    // selects rows that match both the email AND password, returns row count
-    // 1 true, 0 false
-
-    const sql = "SELECT * FROM account WHERE account_email = $1 AND account_password = $2"
-    // console.log(account_email)
-    // console.log(account_password)
-
-    const attemptMatch = await pool.query(sql, [account_email, account_password])
-    // console.log(attemptMatch)
-    return attemptMatch.rowCount
+    // get account info on account_email, returns 0 or 1 AND all account info
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = $1',
+      [account_email])
+    
+    return result.rows[0]
   } catch (error) {
-    // console.log("HELLOOOO", error)
-    return error.message
+    // return if rows == 0
+    return new Error("No matching email found")
   }
 }
 
-module.exports = {registerAccount, loginAccount, checkExistingEmail, checkAccountPassword}
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail }

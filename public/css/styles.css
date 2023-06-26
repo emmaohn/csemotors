@@ -204,6 +204,10 @@ nav {
 }
 
 /* BASE FORM STYLING */
+.form label {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-bottom: .1em;
+}
 .form {
   max-width: 30em;
   margin: 0 auto;
@@ -286,6 +290,65 @@ nav {
   margin-bottom: 1em;
 }
 
+/* EDITVEHICLE FORM */
+#updateBtn:disabled {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* DELETECONFIRM FORM */
+/* #deleteForm {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+} */
+input[readonly] {
+  outline: none;
+  border: 3px solid rgb(34, 95, 207);
+}
+
+.manage-inventory label {
+  font-size: 1.1em;
+  margin-bottom: .6em;
+}
+.manage-inventory table {
+  border-collapse: collapse;
+  margin-left: 2em;
+  width: 70%;
+}
+.manage-inventory th {
+  text-align: left;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding: 0 1em;
+}
+.manage-inventory table td {
+  height: 50px;
+  min-width: 5em;
+  text-align: center;
+}
+.manage-inventory table tr td:first-child {
+  padding: 0 1em;
+  text-align: left;
+}
+.manage-inventory table tr td:nth-child(1n + 2) {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 500;
+}
+.manage-inventory table tbody tr:nth-child(odd) {
+  border: 1.5px solid rgb(211, 211, 211);
+}
+.manage-inventory table tbody tr:nth-child(even) {
+  background-color: rgb(233, 233, 233);
+  border: 1.5px solid rgb(211, 211, 211);
+}
+
+.manage-inventory a {
+  text-decoration: none;
+  color: rgb(20, 66, 152);
+  transition: font-size .2s;
+}
+.manage-inventory a:hover {
+  font-size: 1.2em;
+}
+
 /* footer */
 footer {
   padding: 1em;
@@ -320,8 +383,6 @@ footer {
     flex-direction: row-reverse;
     justify-content: space-around;
   }
-
-  
 }
 
 /* tablet */

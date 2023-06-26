@@ -31,7 +31,7 @@
     <input type="email" name="account_email" id="account_email" placeholder="Enter your email" value="<%= locals.account_email %>" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+.\.[a-zA-Z]{2,}$" required>
     
     <label for="account_password">Password:</label>
-    <input type="password" name="account_password" id="account_password" placeholder="Pick a strong password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required>
+    <input type="password" name="account_password" id="account_password" placeholder="Pick a strong password" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[?!.*@])[A-Za-z\d?!.*@]{12,}$" required>
     <p>* Passwords must have minimum 12 characters and include 1 capital letter, 1 number and 1 special character</p>
     
     <input type="submit" value="Sign up">
