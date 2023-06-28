@@ -310,7 +310,7 @@ input[readonly] {
   border: 3px solid rgb(34, 95, 207);
 }
 
-.manage-inventory label {
+.manage-inventory p {
   font-size: 1.1em;
   margin-bottom: .6em;
 }

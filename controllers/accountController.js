@@ -171,7 +171,7 @@ async function editAccountInfo(req, res) {
     res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
 
     req.flash("success", `Congratulations, ${account_firstname} you\'ve succesfully updated your account info.`)
-    res.status(201).render("account/editaccount", {
+    res.status(201).render("account/account", {
       title: "Edit Account Information",
       nav,
       errors:null,
@@ -207,7 +207,7 @@ async function editAccountPassword(req, res) {
     hashedPassword = await bcrypt.hashSync(account_password, 10)
   } catch (error) {
     req.flash("notice", 'Sorry, there was an error processing the registration.')
-    res.status(500).render("account/register", {
+    res.status(500).render("account/editaccount", {
       title: "Registration",
       nav,
       errors: null,
@@ -220,14 +220,14 @@ async function editAccountPassword(req, res) {
   if (regResult) {
     const account = await accountModel.getAccountById(account_id)
     req.flash("success", `Congratulations, ${account_firstname} you\'ve succesfully updated your account info.`)
-    res.status(201).render("account/editaccount", {
+    res.status(201).render("account/account", {
       title: "Edit Account Information",
       nav,
       errors:null,
       account_firstname: account.account_firstname,
     })
   } else {
-    const account = await accountModel.getAccountById(account_id)
+    // const account = await accountModel.getAccountById(account_id)
     req.flash("error", "Sorry, the update failed.")
     res.status(501).render("account/editaccount", {
       title: "Edit Account Information",

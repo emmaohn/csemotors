@@ -186,10 +186,8 @@ Util.checkAuthorization = async (req, res, next) => {
   }
   // !auth ? 404 : next()
   if (!auth) {
-    next({
-      status: 404, 
-      message: 'This is not the page you are looking for... Go about your business... Move along...'
-    })
+    req.flash("notice", "Please log in")
+    res.redirect("/account/login")
     return
   } else {
     next()
