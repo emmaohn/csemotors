@@ -189,14 +189,19 @@ nav {
 /* MANAGEMENT PAGE */
 .management-links {
   padding: 1em;
+  margin-top: -2em;
+  margin-bottom: -2em;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .management-links a {
-  padding: 1em;
+  padding: .6em;
   margin: 1em;
   text-decoration: none;
+  text-align: center;
+  font-size: 1.1em;
   color: black;
   border: 3px solid rgb(34, 95, 207);
   background-color: rgb(168, 197, 250);

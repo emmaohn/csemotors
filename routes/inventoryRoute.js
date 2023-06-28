@@ -2,7 +2,7 @@
 const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
-const { handleErrors } = require("../utilities")
+const { handleErrors, checkIsPrivileged, checkAuthorization } = require("../utilities")
 const invValidate = require('../utilities/inventory-validation')
 const validate = require("../utilities/inventory-validation")
 
@@ -14,25 +14,38 @@ router.get("/detail/:invId", handleErrors(invController.buildByInvId));
 
 // MANAGEMENT ROUTES ** NeEdS tO Be ChAnGeD **
 // Route to build inventory index
-router.get("/", handleErrors(invController.buildManagement));
+router.get(
+  "/", 
+  checkAuthorization,
+  handleErrors(invController.buildManagement)
+)
 
 // Route to build add classification view
-router.get("/addclass", handleErrors(invController.buildAddclass));
+router.get(
+  "/addclass", 
+  checkAuthorization,
+  handleErrors(invController.buildAddclass)
+)
 
 // Process the new classification data
 router.post(
   "/addclass",
+  checkAuthorization,
   invValidate.classRules(),
   invValidate.checkClassData,
   handleErrors(invController.addClass)
 )
 
 // Route to build add vehicle view
-router.get("/addvehicle", handleErrors(invController.buildAddvehicle));
+router.get("/addvehicle", 
+  checkAuthorization,
+  handleErrors(invController.buildAddvehicle),
+)
 
 // Process the new vehicle data
 router.post(
   "/addvehicle",
+  checkAuthorization,
   invValidate.vehicleRules(),
   invValidate.checkVehicleData,
   handleErrors(invController.addVehicle),
@@ -42,22 +55,32 @@ router.post(
 router.get("/getInventory/:classification_id", handleErrors(invController.getInventoryJSON))
 
 // Build edit vehicle information view
-router.get("/edit/:inv_id", handleErrors(invController.buildVehicleEdit))
+router.get(
+  "/edit/:inv_id", 
+  checkAuthorization,
+  handleErrors(invController.buildVehicleEdit)
+)
 
 // Post route /update
 router.post(
-  "/update", 
+  "/update",
+  checkAuthorization,
   invValidate.vehicleRules(),
   invValidate.checkVehicleUpdateData,
   handleErrors(invController.updateVehicle)
 )
 
 // Build vehicle deletion confirmation view
-router.get("/delete/:inv_id", handleErrors(invController.buildVehicleDeleteConfirm))
+router.get(
+  "/delete/:inv_id", 
+  checkAuthorization,
+  handleErrors(invController.buildVehicleDeleteConfirm)
+)
 
 // Post route /delete
 router.post(
   "/delete", 
+  checkAuthorization,
   handleErrors(invController.deleteVehicle)
 )
 
