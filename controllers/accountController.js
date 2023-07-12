@@ -1,4 +1,5 @@
 const accountModel = require("../models/account-model")
+const messageModel = require("../models/message-model")
 const utilities = require("../utilities/")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
@@ -126,10 +127,12 @@ async function accountLogin(req, res) {
 * *************************************** */
 async function buildAccount(req, res, next) {
   let nav = await utilities.getNav()
+  let unreadMessages = await messageModel.getUnreadMessageCountByAccountId(res.locals.accountData.account_id)
   res.render("account/account", {
     title: "Account",
     nav,
     errors: null,
+    unreadMessages,
   })
 }
 
@@ -140,7 +143,6 @@ async function buildEditAccount(req, res, next) {
   let nav = await utilities.getNav()
   let account = res.locals.accountData
   const account_id = parseInt(req.params.account_id)
-  console.log("Hellooooo build editaccount", account_id)
   res.render("account/editaccount", {
     title: "Edit Account Information",
     nav,
@@ -216,7 +218,6 @@ async function editAccountPassword(req, res) {
   // pass (hashpass, account_id) to model UPDATE statement
   const regResult = await accountModel.changeAccountPassword(hashedPassword, account_id)
   // account account = res.locals.accountData
-  console.log('Helooo!', account)
   if (regResult) {
     const account = await accountModel.getAccountById(account_id)
     req.flash("success", `Congratulations, ${account_firstname} you\'ve succesfully updated your account info.`)

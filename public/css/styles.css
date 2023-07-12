@@ -354,6 +354,18 @@ input[readonly] {
   font-size: 1.2em;
 }
 
+.bubble {
+  height: 12px;
+  width: 12px;
+  border-radius: 12px;
+}
+.false {
+  background-color: cornflowerblue;
+}
+.true {
+  border: 2px solid gray;
+}
+
 /* footer */
 footer {
   padding: 1em;
